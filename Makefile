@@ -15,15 +15,15 @@ DOCKER_RUN = docker run $(DOCKER_RUNARGS)
 
 # default package to build
 TARGET_MANAGER = "yum"
-TARGET_OS = "rhel"
+TARGET_OS = "centos"
 TARGET_OS_MAJOR = "7"
-TARGET_ARCH = $(uname -m)
+TARGET_ARCH = x86_64
 
 all: libzbxpgsql.so
 
 # build module
 libzbxpgsql.so:
-	$(DOCKER_RUN) $(PACKAGE_NAME)/build-debian-jessie build
+	$(DOCKER_RUN) $(PACKAGE_NAME)/build-centos-7 build
 
 # build docker images for compiling, testing and packaging the module
 docker-images:
@@ -31,7 +31,7 @@ docker-images:
 
 # create source tarball
 dist:
-	$(DOCKER_RUN) $(PACKAGE_NAME)/build-debian-jessie dist
+	$(DOCKER_RUN) $(PACKAGE_NAME)/build-centos-7 dist
 
 clean:
 	rm -rvf release
@@ -47,23 +47,24 @@ package:
 		$(PACKAGE_NAME)/build-$(TARGET_OS)-$(TARGET_OS_MAJOR) package;
 
 test-packages:
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-centos-6 test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-centos-7 test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-debian-wheezy test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-ubuntu-precise test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-ubuntu-trusty test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-centos-6 test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-centos-7 test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-debian-wheezy test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-debian-jessie test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-ubuntu-trusty test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-ubuntu-xenial test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-centos-6 test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-centos-7 test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-debian-wheezy test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-debian-jessie test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-ubuntu-trusty test_package
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-ubuntu-xenial test_package
+	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-4.0-centos-7 test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-centos-6 test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-centos-7 test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-debian-wheezy test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-ubuntu-precise test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-ubuntu-trusty test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-centos-6 test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-centos-7 test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-debian-wheezy test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-debian-jessie test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-ubuntu-trusty test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.0-ubuntu-xenial test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-centos-6 test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-centos-7 test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-debian-wheezy test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-debian-jessie test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-ubuntu-trusty test_package
+#	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-3.2-ubuntu-xenial test_package
 
 # run key compatibility tests (requires `make run-postgres`)
 test-keys:

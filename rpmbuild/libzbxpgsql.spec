@@ -14,13 +14,8 @@ Source0     : %{name}-%{version}.tar.gz
 Buildroot   : %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # package dependencies
-%if "%{_zabbix_version}" == "2"
-Requires    : zabbix-agent >= 2.2.0, zabbix-agent < 3.0.0
-%define moddir %{_libdir}
-%else
-Requires    : zabbix-agent >= 3.0.0
+Requires    : zabbix-agent >= 4.0.0
 %define moddir %{_libdir}/zabbix
-%endif
 
 # minimum libpq version based on latest patch of RHEL 5
 Requires    : postgresql-libs >= 8.1.23
@@ -54,7 +49,7 @@ mv $RPM_BUILD_ROOT%{_libdir}/%{name}.so $RPM_BUILD_ROOT%{moddir}/modules/%{name}
 install -dm 755 $RPM_BUILD_ROOT%{_sysconfdir}/zabbix/zabbix_agentd.d
 echo "LoadModule=libzbxpgsql.so" > $RPM_BUILD_ROOT%{_sysconfdir}/zabbix/zabbix_agentd.d/%{name}.conf
 install -dm 755 $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d
-install -m 644 ./conf/libzbxpgsql.conf $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.d/
+install -m 644 ./conf/libzbxpgsql.conf $RPM_BUILD_ROOT%{_sysconfdir}/zabbix/
 
 %clean
 # Clean out the build root
@@ -63,7 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %{moddir}/modules/libzbxpgsql.so
 %{_sysconfdir}/zabbix/zabbix_agentd.d/%{name}.conf
-%{_sysconfdir}/%{name}.d/libzbxpgsql.conf
+%{_sysconfdir}/zabbix/libzbxpgsql.conf
 
 %changelog
 * Sat Aug 20 2016 Ryan Armstrong <ryan@cavaliercoder.com> 1.1.0-1

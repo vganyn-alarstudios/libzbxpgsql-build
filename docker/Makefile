@@ -15,30 +15,31 @@ DOCKER_RUN = docker run \
 all: docker-images
 
 docker-images: \
-	build-centos-6 \
 	build-centos-7 \
-	build-debian-wheezy \
-	build-debian-jessie \
-	build-ubuntu-precise \
-	build-ubuntu-trusty \
-	build-ubuntu-xenial \
-	zabbix-2.2-centos-6 \
-	zabbix-2.2-centos-7 \
-	zabbix-2.2-debian-wheezy \
-	zabbix-2.2-ubuntu-precise \
-	zabbix-2.2-ubuntu-trusty \
-	zabbix-3.0-centos-6 \
-	zabbix-3.0-centos-7 \
-	zabbix-3.0-debian-jessie \
-	zabbix-3.0-debian-wheezy \
-	zabbix-3.0-ubuntu-trusty \
-	zabbix-3.0-ubuntu-xenial \
-	zabbix-3.2-centos-6 \
-	zabbix-3.2-centos-7 \
-	zabbix-3.2-debian-jessie \
-	zabbix-3.2-debian-wheezy \
-	zabbix-3.2-ubuntu-trusty \
-	zabbix-3.2-ubuntu-xenial
+	zabbix-4.0-centos-7 #\
+#	build-centos-8 \
+#	build-debian-wheezy \
+#	build-debian-jessie \
+#	build-ubuntu-precise \
+#	build-ubuntu-trusty \
+#	build-ubuntu-xenial \
+#	zabbix-2.2-centos-6 \
+#	zabbix-2.2-centos-7 \
+#	zabbix-2.2-debian-wheezy \
+#	zabbix-2.2-ubuntu-precise \
+#	zabbix-2.2-ubuntu-trusty \
+#	zabbix-3.0-centos-6 \
+#	zabbix-3.0-centos-7 \
+#	zabbix-3.0-debian-jessie \
+#	zabbix-3.0-debian-wheezy \
+#	zabbix-3.0-ubuntu-trusty \
+#	zabbix-3.0-ubuntu-xenial \
+#	zabbix-3.2-centos-6 \
+#	zabbix-3.2-centos-7 \
+#	zabbix-3.2-debian-jessie \
+#	zabbix-3.2-debian-wheezy \
+#	zabbix-3.2-ubuntu-trusty \
+#	zabbix-3.2-ubuntu-xenial
 
 docker-images-update:
 	docker pull centos:6
@@ -192,4 +193,10 @@ zabbix-3.2-ubuntu-xenial:
 	$(DOCKER_BUILD) \
 		-f zabbix-3.2-ubuntu-xenial.Dockerfile \
 		-t libzbxpgsql/zabbix-3.2-ubuntu-xenial \
+		.
+
+zabbix-4.0-centos-7:
+	$(DOCKER_BUILD) \
+		-f zabbix-4.0-centos-7.Dockerfile \
+		-t libzbxpgsql/zabbix-4.0-centos-7 \
 		.
