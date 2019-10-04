@@ -47,7 +47,7 @@ package:
 		$(PACKAGE_NAME)/build-$(TARGET_OS)-$(TARGET_OS_MAJOR) package;
 
 test-packages:
-	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-4.0-centos-7 test_package
+	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-4.0-centos-8 test_package
 #	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-centos-6 test_package
 #	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-centos-7 test_package
 #	$(DOCKER_RUN) $(PACKAGE_NAME)/zabbix-2.2-debian-wheezy test_package

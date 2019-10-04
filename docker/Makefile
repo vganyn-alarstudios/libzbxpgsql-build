@@ -16,7 +16,9 @@ all: docker-images
 
 docker-images: \
 	build-centos-7 \
-	zabbix-4.0-centos-7 #\
+	zabbix-4.0-centos-7\
+	build-centos-8 \
+	zabbix-4.0-centos-8 #\
 #	build-centos-8 \
 #	build-debian-wheezy \
 #	build-debian-jessie \
@@ -44,6 +46,7 @@ docker-images: \
 docker-images-update:
 	docker pull centos:6
 	docker pull centos:7
+	docker pull centos:8
 	docker pull debian:wheezy
 	docker pull debian:jessie
 	docker pull ubuntu:trusty
@@ -61,6 +64,12 @@ build-centos-7:
 	$(DOCKER_BUILD) \
 		-f build-centos-7.Dockerfile \
 		-t libzbxpgsql/build-centos-7 \
+		.
+
+build-centos-8:
+	$(DOCKER_BUILD) \
+		-f build-centos-8.Dockerfile \
+		-t libzbxpgsql/build-centos-8 \
 		.
 
 build-debian-wheezy:
@@ -199,4 +208,10 @@ zabbix-4.0-centos-7:
 	$(DOCKER_BUILD) \
 		-f zabbix-4.0-centos-7.Dockerfile \
 		-t libzbxpgsql/zabbix-4.0-centos-7 \
+		.
+
+zabbix-4.0-centos-8:
+	$(DOCKER_BUILD) \
+		-f zabbix-4.0-centos-8.Dockerfile \
+		-t libzbxpgsql/zabbix-4.0-centos-8 \
 		.
